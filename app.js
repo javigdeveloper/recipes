@@ -14,13 +14,25 @@ app.listen(3000);
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
+  // res.render("index", { data });
+  res.render("index");
+});
+
+app.get("/ing/:ingredient", (req, res) => {
+  console.log(req.params);
+  const food = req.params.ingredient;
+  console.log(food);
   fetch(
-    `https://api.edamam.com/search?q=chicken&app_id=${process.env.API_ID}&app_key=${process.env.API_KEY}&from=0&to=3&calories=591-722&health=alcohol-free`
+    `https://api.edamam.com/search?q=${food}&app_id=${process.env.API_ID}&app_key=${process.env.API_KEY}`
   )
-    .then((promise) => promise.json())
-    .then((data) => {
-      console.log(data.hits[0].recipe.image);
-      res.render("index", { data });
+    .then((promise) => {
+      promise.json().then((datos) => {
+        res.send(datos);
+        console.log(datos);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
     });
 });
 

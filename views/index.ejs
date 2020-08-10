@@ -2,8 +2,13 @@
 <html lang="en">
   <%- include("./partials/head.ejs") %>
   <body>
-    <h1>Home Page</h1>
-    <img src="<%= data.hits[0].recipe.image %>" alt="pic" />
+    <h1>Write an ingredient to find recipes:</h1>
+    <form>
+      <label for="ingredient">Main ingredient:</label>
+      <input type="text" id="ingredient" name="ingredient" />
+      <button type="submit">Submit</button>
+    </form>
     <%- include("./partials/footer.ejs") %>
+    <script src="scripts.js"></script>
   </body>
 </html>
