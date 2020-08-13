@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%- include("./partials/nav.ejs") %>
+    <h1>Share your recipe with the world!</h1>
+    <form action="/community" method="POST">
+      <label for="nameOfRecipe">What's your recipe called:</label>
+      <input type="text" id="nameOfRecipe" name="nameOfRecipe" />
+      <label for="mainIngredient">Choose at least one main ingredient:</label>
+      <input type="text" id="mainIngredient" name="mainIngredient" />
+      <label for="preparation">Please share all the steps:</label>
+      <input type="text" id="preparation" name="preparation" />
+      <button type="submit">Submit</button>
+    </form>
+
+    <%- include("./partials/footer.ejs") %>
+    <script src="scripts.js"></script>
+  </body>
+</html>

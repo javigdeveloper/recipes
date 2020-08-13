@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <!-- <%- include("./partials/nav.ejs") %> -->
+    <h3><%= recipeFromDB.nameOfRecipe %></h3>
+    <h4>Main Ingredient:</h4>
+    <p><%= recipeFromDB.mainIngredient %></p>
+    <p><%= recipeFromDB.preparation %></p>
+
+    <div class="cards"></div>
+    <%- include("./partials/footer.ejs") %>
+    <script src="scripts.js"></script>
+  </body>
+</html>

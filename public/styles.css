@@ -1,3 +1,21 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
 h1 {
   color: red;
+}
+
+.card {
+  border: 10px;
+  border-style: outset;
+  margin: 10px;
+  padding: 0 10px;
+  width: 30vw;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }

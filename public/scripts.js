@@ -1,4 +1,4 @@
-let body = document.getElementsByTagName("body")[0];
+let cards = document.querySelector(".cards");
 let input = document.querySelector("#ingredient");
 let btn = document.getElementsByTagName("button")[0];
 
@@ -14,10 +14,13 @@ btn.addEventListener("click", (e) => {
         console.log(data.hits[0].recipe);
         let objectOfIngr = data.hits[0].recipe.ingredientLines;
         let sourceOfImg = data.hits[0].recipe.image;
+        let card = document.createElement("div");
         let imagen = document.createElement("img");
         let listOfIngr = document.createElement("ul");
+        card.setAttribute("class", "card");
         imagen.setAttribute("src", sourceOfImg);
-        body.append(imagen, listOfIngr);
+        card.append(imagen, listOfIngr);
+        cards.append(card);
         objectOfIngr.forEach((ingr) => {
           console.log(ingr);
           let item = document.createElement("li");

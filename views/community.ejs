@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%- include("./partials/nav.ejs") %>
+    <h1>All recipes</h1>
+    <div class="cards">
+      <% communityRecipes.forEach(el => { %>
+
+      <a href="/community/<%= el._id %>">
+        <div class="card">
+          <h3><%= el.nameOfRecipe %></h3>
+          <h4>Main Ingredient:</h4>
+          <p><%= el.mainIngredient %></p>
+          <!-- <p><%= el.preparation %></p> -->
+        </div>
+      </a>
+
+      <% }) %>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>
