@@ -58,20 +58,20 @@ app.post("/community", (req, res) => {
     });
 });
 
-// app.get("/community/:id", (req, res) => {
-//   const id = req.params.id;
-//   Recipe.findById(id)
-//     .then((result) => {
-//       console.log(result);
-//       res.render("preparation", { recipeFromDB: result });
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
-
 app.get("/community/create", (req, res) => {
   res.render("create");
+});
+
+app.get("/community/:id", (req, res) => {
+  const id = req.params.id;
+  Recipe.findById(id)
+    .then((result) => {
+      console.log(result);
+      res.render("preparation", { recipeFromDB: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 // api routes:
