@@ -19,3 +19,9 @@ h1 {
   flex-direction: column;
   flex-wrap: nowrap;
 }
+
+.delete {
+  cursor: pointer;
+  text-decoration: underline;
+  color: rgb(85 26 139);
+}
