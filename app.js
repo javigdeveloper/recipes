@@ -2,6 +2,7 @@ const express = require("express");
 const fetch = require("node-fetch");
 const mongoose = require("mongoose");
 const Recipe = require("./models/recipe");
+const { response } = require("express");
 // const { render } = require("ejs");
 require("dotenv").config();
 
@@ -68,6 +69,20 @@ app.get("/community/:id", (req, res) => {
     .then((result) => {
       console.log(result);
       res.render("preparation", { recipeFromDB: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+// This handler cannot send a redirect as a response, it can send json
+// or text data back to the broser
+app.delete("/community/:id", (req, res) => {
+  const id = req.params.id;
+
+  Recipe.findByIdAndDelete(id)
+    .then((result) => {
+      res.json({ redirect: "/community" });
     })
     .catch((err) => {
       console.log(err);

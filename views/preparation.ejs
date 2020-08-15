@@ -7,8 +7,22 @@
     <h4>Main Ingredient:</h4>
     <p><%= recipeFromDB.mainIngredient %></p>
     <p><%= recipeFromDB.preparation %></p>
-
+    <a class="delete" data-doc="<%= recipeFromDB._id %>">delete</a>
     <div class="cards"></div>
     <%- include("./partials/footer.ejs") %>
   </body>
+  <script>
+    const trashcan = document.querySelector(".delete");
+    trashcan.addEventListener("click", (e) => {
+      const endpoint = `/community/${trashcan.dataset.doc}`;
+      fetch(endpoint, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => (window.location.href = data.redirect))
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  </script>
 </html>
