@@ -8,11 +8,10 @@
       <% communityRecipes.forEach(el => { %>
 
       <a href="/community/<%= el._id %>">
-        <div class="card">
+        <div class="card communityCard">
           <h3><%= el.nameOfRecipe %></h3>
           <h4>Main Ingredient:</h4>
           <p><%= el.mainIngredient %></p>
-          <!-- <p><%= el.preparation %></p> -->
         </div>
       </a>
 

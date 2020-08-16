@@ -1,18 +1,37 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  font-size: 25px;
+  background-color: rgb(255 196 5);
+  padding: 16px;
+}
+
+nav a {
+  color: rgb(148 0 0);
+  font-weight: 600;
+}
+
 .cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
 
-h1 {
-  color: red;
+.webRecipesH3 {
+  margin-top: 30px;
+  text-align: center;
 }
 
 .card {
   border: 10px;
   border-style: outset;
-  margin: 10px;
-  padding: 0 10px;
+  margin: 20px;
   width: 30vw;
   min-width: 240px;
   display: flex;
@@ -20,8 +39,36 @@ h1 {
   flex-wrap: nowrap;
 }
 
+.card ul {
+  margin-top: 10px;
+  padding-left: 22px;
+}
+
+.communityCard {
+  padding-left: 30px;
+}
+
 .delete {
   cursor: pointer;
-  text-decoration: underline;
-  color: rgb(85 26 139);
+  font-size: 28px;
+}
+
+form {
+  border: 10px;
+  margin: auto;
+  margin-top: 25px;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.prepH1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+footer {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }

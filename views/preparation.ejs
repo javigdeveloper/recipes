@@ -3,12 +3,15 @@
   <%- include("./partials/head.ejs") %>
   <body>
     <%- include("./partials/nav.ejs") %>
-    <h3><%= recipeFromDB.nameOfRecipe %></h3>
-    <h4>Main Ingredient:</h4>
-    <p><%= recipeFromDB.mainIngredient %></p>
-    <p><%= recipeFromDB.preparation %></p>
-    <a class="delete" data-doc="<%= recipeFromDB._id %>">delete</a>
-    <div class="cards"></div>
+    <div class="card">
+      <h3><%= recipeFromDB.nameOfRecipe %></h3>
+      <h4>Main Ingredient:</h4>
+      <p><%= recipeFromDB.mainIngredient %></p>
+      <p><%= recipeFromDB.preparation %></p>
+      <a class="delete" data-doc="<%= recipeFromDB._id %>">
+        <i class="ri-delete-bin-7-fill"></i>
+      </a>
+    </div>
     <%- include("./partials/footer.ejs") %>
   </body>
   <script>
