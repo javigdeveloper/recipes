@@ -23,6 +23,9 @@ app.set("view engine", "ejs");
 
 // middleware & static files:
 app.use(express.static("public"));
+// next line takes any json data that comes along with a request
+// and parses it into a javascript object
+app.use(express.json());
 // for submitted form from ejs file to make it a workable format:
 app.use(express.urlencoded({ extended: true }));
 
@@ -35,7 +38,7 @@ app.get("/", (req, res) => {
 app.use("/community", communityRoutes);
 
 // user routes
-app.use("/register", userRoutes);
+app.use(userRoutes);
 
 // api routes:
 app.get("/ing/:ingredient", (req, res) => {

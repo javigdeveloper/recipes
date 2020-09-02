@@ -4,7 +4,7 @@ const community_index = (req, res) => {
   Recipe.find()
     .sort({ createdAt: -1 })
     .then((result) => {
-      res.render("community", { communityRecipes: result });
+      res.render("communityRecipes/community", { communityRecipes: result });
     })
     .catch((err) => {
       console.log(err);
@@ -15,7 +15,7 @@ const community_details = (req, res) => {
   const id = req.params.id;
   Recipe.findById(id)
     .then((result) => {
-      res.render("preparation", { recipeFromDB: result });
+      res.render("communityRecipes/preparation", { recipeFromDB: result });
     })
     .catch((err) => {
       res.status(404).render("404");
@@ -23,7 +23,7 @@ const community_details = (req, res) => {
 };
 
 const community_create_get = (req, res) => {
-  res.render("create");
+  res.render("communityRecipes/create");
 };
 
 const community_create_post = (req, res) => {

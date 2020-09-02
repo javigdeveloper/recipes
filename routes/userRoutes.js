@@ -3,8 +3,10 @@ const userController = require("../controllers/userController");
 const router = express.Router();
 
 // user routes
-router.get("/", userController.create_user_get);
-router.post("/", userController.create_user_post);
+router.get("/register", userController.create_user_get);
+router.post("/register", userController.create_user_post);
+router.get("/login", userController.login_user_get);
+router.post("/login", userController.login_user_post);
 
 // router.get("/", communityController.community_index);
 // router.post("/", communityController.community_create_post);

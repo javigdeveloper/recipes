@@ -40,6 +40,15 @@ const create_user_post = (req, res) => {
     });
 };
 
+const login_user_get = (req, res) => {
+  res.render("login");
+};
+
+const login_user_post = (req, res) => {
+  console.log(req.body);
+  res.send("<h1>Testing from server</h1>");
+};
+
 // This handler cannot send a redirect as a response, it can send json
 // or text data back to the broser
 
@@ -57,9 +66,6 @@ const create_user_post = (req, res) => {
 module.exports = {
   create_user_get,
   create_user_post,
-  //   community_index,
-  //   community_details,
-  //   community_create_get,
-  //   community_create_post,
-  //   community_delete,
+  login_user_get,
+  login_user_post,
 };
