@@ -3,6 +3,7 @@ const fetch = require("node-fetch");
 const mongoose = require("mongoose");
 const communityRoutes = require("./routes/communityRoutes");
 const userRoutes = require("./routes/userRoutes");
+const cookieParser = require("cookie-parser");
 // const { response } = require("express");
 // const { render } = require("ejs");
 require("dotenv").config();
@@ -12,7 +13,11 @@ const app = express();
 // connecting to mongoDB:
 let mongoDB = `mongodb+srv://javigdeveloper:${process.env.MONGO_PASSWORD}@recipesdb.pezey.gcp.mongodb.net/recipetest?retryWrites=true&w=majority`;
 mongoose
-  .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(mongoDB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
   .then((result) => {
     app.listen(3000);
   })
@@ -28,6 +33,7 @@ app.use(express.static("public"));
 app.use(express.json());
 // for submitted form from ejs file to make it a workable format:
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // routes
 app.get("/", (req, res) => {
@@ -58,6 +64,20 @@ app.get("/ing/:ingredient", (req, res) => {
       console.log(err);
     });
 });
+
+// cookies:
+// app.get("/set-cookies", (req, res) => {
+// method used without cookie-parser is:
+// res.setHeader("set-Cookie", "newUser=true");
+//   res.cookie("newUser", false, { maxAge: 1000 * 60, httpOnly: true });
+//   res.send("you got the cookie");
+// });
+
+// app.get("/read-cookies", (req, res) => {
+//   const cookies = req.cookies;
+//   console.log(cookies);
+//   res.json(cookies);
+// });
 
 // not found:
 app.use((req, res) => {

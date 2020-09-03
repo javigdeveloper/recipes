@@ -1,46 +1,61 @@
 const User = require("../models/user");
+const jwt = require("jsonwebtoken");
 
-// const community_index = (req, res) => {
-//   User.find()
-//     .sort({ createdAt: -1 })
-//     .then((result) => {
-//       res.render("community", { communityRecipes: result });
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
+// handling errors:
+const handleErrors = (err) => {
+  console.log(err.message, err.code);
+  let errors = { email: "", password: "" };
 
-// const community_details = (req, res) => {
-//   const id = req.params.id;
-//   User.findById(id)
-//     .then((result) => {
-//       res.render("preparation", { recipeFromDB: result });
-//     })
-//     .catch((err) => {
-//       res.status(404).render("404");
-//     });
-// };
+  // duplicate email error code:
+  if (err.code === 11000) {
+    errors.email = "That email already exists";
+    return errors;
+  }
+
+  // validation errors:
+  if (err.message.includes("User validation failed")) {
+    Object.values(err.errors).forEach(({ properties }) => {
+      errors[properties.path] = properties.message;
+    });
+  }
+  return errors;
+};
+
+const maxAge = 1 * 24 * 60 * 60;
+const createToken = (id) => {
+  return jwt.sign({ id }, "this is the secret", { expiresIn: maxAge });
+};
 
 const create_user_get = (req, res) => {
   res.render("register");
 };
 
-const create_user_post = (req, res) => {
+const create_user_post = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.create({ email, password });
+    const token = createToken(user._id);
+    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.status(201).json({ user: user._id });
+  } catch (err) {
+    const errors = handleErrors(err);
+    res.status(400).json({ errors });
+  }
   // creating an instance of a user with req.body,
   // which is the object comming from the form
-  const user = new User(req.body);
-  user
-    .save()
-    .then((result) => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  // const user = new User(req.body);
+  // user
+  //   .save()
+  //   .then((result) => {
+  //     res.redirect("/");
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 };
 
-const login_user_get = (req, res) => {
+const login_user_get = async (req, res) => {
   res.render("login");
 };
 
