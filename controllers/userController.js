@@ -6,6 +6,16 @@ const handleErrors = (err) => {
   console.log(err.message, err.code);
   let errors = { email: "", password: "" };
 
+  // incorrect email:
+  if (err.message === "incorrect email") {
+    errors.email = "that email is not registered";
+  }
+
+  // incorrect password:
+  if (err.message === "incorrect password") {
+    errors.password = "that password is incorrect";
+  }
+
   // duplicate email error code:
   if (err.code === 11000) {
     errors.email = "That email already exists";
@@ -23,7 +33,7 @@ const handleErrors = (err) => {
 
 const maxAge = 1 * 24 * 60 * 60;
 const createToken = (id) => {
-  return jwt.sign({ id }, "this is the secret", { expiresIn: maxAge });
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: maxAge });
 };
 
 const create_user_get = (req, res) => {
@@ -59,9 +69,18 @@ const login_user_get = async (req, res) => {
   res.render("login");
 };
 
-const login_user_post = (req, res) => {
-  console.log(req.body);
-  res.send("<h1>Testing from server</h1>");
+const login_user_post = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.login(email, password);
+    const token = createToken(user._id);
+    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.status(200).json({ user: user._id });
+  } catch (err) {
+    const errors = handleErrors(err);
+    res.status(400).json({ errors });
+  }
 };
 
 // This handler cannot send a redirect as a response, it can send json
