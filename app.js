@@ -47,7 +47,12 @@ app.use("/community", communityRoutes);
 app.use(userRoutes);
 
 // api routes:
-app.get("/ing/:ingredient", (req, res) => {
+app.get("/web", (req, res) => {
+  res.render("webRecipes/web");
+});
+
+// app.get("/ing/:ingredient", (req, res) => {
+app.get("/web/:ingredient", (req, res) => {
   console.log(req.params);
   const food = req.params.ingredient;
   console.log(food);

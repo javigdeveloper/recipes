@@ -5,7 +5,8 @@ let btn = document.getElementsByTagName("button")[0];
 btn.addEventListener("click", (e) => {
   let ingredient = input.value;
   e.preventDefault();
-  fetch(`ing/${ingredient}`).then((promise) => {
+  // fetch(`ing/${ingredient}`).then((promise) => {
+  fetch(`web/${ingredient}`).then((promise) => {
     console.log("this is the ingredient in client", ingredient);
     promise
       .json()

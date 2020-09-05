@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+    <h3 class="webRecipesH3">Write an ingredient to find recipes:</h3>
+    <form>
+      <label for="ingredient">Main ingredient:</label>
+      <input type="text" id="ingredient" name="ingredient" />
+      <button type="submit">Submit</button>
+    </form>
+    <div class="cards"></div>
+    <%- include("../partials/footer.ejs") %>
+    <!-- not ../public/scripts.js because I'm already telling express the static files are on public -->
+    <script src="/scripts.js"></script>
+  </body>
+</html>
