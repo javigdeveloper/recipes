@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const communityRoutes = require("./routes/communityRoutes");
 const userRoutes = require("./routes/userRoutes");
 const cookieParser = require("cookie-parser");
+const { requireAuth, checkUser } = require("./middleware/userMiddleware");
 // const { response } = require("express");
 // const { render } = require("ejs");
 require("dotenv").config();
@@ -41,18 +42,18 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.use("/community", communityRoutes);
-
-// user routes
-app.use(userRoutes);
+app.use("/community", requireAuth, checkUser, communityRoutes);
 
 // api routes:
-app.get("/web", (req, res) => {
+app.get("/web", requireAuth, checkUser, (req, res) => {
   res.render("webRecipes/web");
 });
 
+// user routes
+app.use(checkUser, userRoutes);
+
 // app.get("/ing/:ingredient", (req, res) => {
-app.get("/web/:ingredient", (req, res) => {
+app.get("/web/:ingredient", checkUser, (req, res) => {
   console.log(req.params);
   const food = req.params.ingredient;
   console.log(food);

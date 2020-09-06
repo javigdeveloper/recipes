@@ -83,6 +83,11 @@ const login_user_post = async (req, res) => {
   }
 };
 
+const logout_user_get = (req, res) => {
+  res.cookie("jwt", "", { maxAge: 1 });
+  res.redirect("/");
+};
+
 // This handler cannot send a redirect as a response, it can send json
 // or text data back to the broser
 
@@ -102,4 +107,5 @@ module.exports = {
   create_user_post,
   login_user_get,
   login_user_post,
+  logout_user_get,
 };

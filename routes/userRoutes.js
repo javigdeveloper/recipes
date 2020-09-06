@@ -7,6 +7,7 @@ router.get("/register", userController.create_user_get);
 router.post("/register", userController.create_user_post);
 router.get("/login", userController.login_user_get);
 router.post("/login", userController.login_user_post);
+router.get("/logout", userController.logout_user_get);
 
 // router.get("/", communityController.community_index);
 // router.post("/", communityController.community_create_post);
