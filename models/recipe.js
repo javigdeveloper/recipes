@@ -16,6 +16,9 @@ const recipeSchema = new Schema(
       type: String,
       required: true,
     },
+    owner: {
+      type: String,
+    },
     like: {
       type: Number,
     },
