@@ -3,9 +3,11 @@
   <%- include("../partials/head.ejs") %>
   <body>
     <%- include("../partials/nav.ejs") %>
-    <h3 class="webRecipesH3">Write an ingredient to find recipes:</h3>
+    <h3 class="webRecipesH3">
+      Write a recipe name or main ingredient/s to check the number of calories:
+    </h3>
     <form>
-      <label for="ingredient">Main ingredient:</label>
+      <label for="ingredient">Name of recipe or main ingredient/s:</label>
       <input type="text" id="ingredient" name="ingredient" />
       <button type="submit">Submit</button>
     </form>

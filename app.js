@@ -45,25 +45,22 @@ app.get("/", (req, res) => {
 app.use("/community", requireAuth, checkUser, communityRoutes);
 
 // api routes:
-app.get("/web", requireAuth, checkUser, (req, res) => {
-  res.render("webRecipes/web");
+app.get("/calories", requireAuth, checkUser, (req, res) => {
+  res.render("webRecipes/calories");
 });
 
 // user routes
 app.use(checkUser, userRoutes);
 
 // app.get("/ing/:ingredient", (req, res) => {
-app.get("/web/:ingredient", checkUser, (req, res) => {
-  console.log(req.params);
+app.get("/calories/:ingredient", checkUser, (req, res) => {
   const food = req.params.ingredient;
-  console.log(food);
   fetch(
     `https://api.edamam.com/search?q=${food}&app_id=${process.env.API_ID}&app_key=${process.env.API_KEY}`
   )
     .then((promise) => {
       promise.json().then((datos) => {
         res.send(datos);
-        console.log(datos);
       });
     })
     .catch((err) => {

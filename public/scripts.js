@@ -6,28 +6,33 @@ btn.addEventListener("click", (e) => {
   let ingredient = input.value;
   e.preventDefault();
   // fetch(`ing/${ingredient}`).then((promise) => {
-  fetch(`web/${ingredient}`).then((promise) => {
-    console.log("this is the ingredient in client", ingredient);
+  fetch(`calories/${ingredient}`).then((promise) => {
     promise
       .json()
       .then((data) => {
-        console.log(data.hits[0]);
-        console.log(data.hits[0].recipe);
-        let objectOfIngr = data.hits[0].recipe.ingredientLines;
-        let sourceOfImg = data.hits[0].recipe.image;
-        let card = document.createElement("div");
-        let imagen = document.createElement("img");
-        let listOfIngr = document.createElement("ul");
-        card.setAttribute("class", "card");
-        imagen.setAttribute("src", sourceOfImg);
-        card.append(imagen, listOfIngr);
-        cards.append(card);
-        objectOfIngr.forEach((ingr) => {
-          console.log(ingr);
-          let item = document.createElement("li");
-          item.innerHTML = ingr;
-          listOfIngr.appendChild(item);
+        console.log(data.hits);
+        data.hits.forEach((el) => {
+          let sourceOfTitle = el.recipe.label;
+          let sourceOfImg = el.recipe.image;
+          let calories = `calories: ${el.recipe.calories}`;
+          let arrOfIngr = el.recipe.ingredientLines;
+          let card = document.createElement("div");
+          let title = document.createElement("h2");
+          let imagen = document.createElement("img");
+          let listOfIngr = document.createElement("ul");
+          title.innerText = sourceOfTitle;
+          card.classList.add("web", "card");
+          imagen.setAttribute("src", sourceOfImg);
+          card.append(title, imagen, calories, listOfIngr);
+          cards.append(card);
+          arrOfIngr.forEach((ingr) => {
+            let item = document.createElement("li");
+            item.innerHTML = ingr;
+            listOfIngr.appendChild(item);
+          });
         });
+        let footer = document.querySelector("footer");
+        footer.classList.add("withCards");
       })
       .catch((err) => {
         console.log(err);

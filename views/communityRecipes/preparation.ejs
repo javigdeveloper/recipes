@@ -3,7 +3,7 @@
   <%- include("../partials/head.ejs") %>
   <body>
     <%- include("../partials/nav.ejs") %>
-    <div class="card">
+    <div class="card singleRecipe">
       <h3><%= recipeFromDB.nameOfRecipe %></h3>
       <h4>Main Ingredient:</h4>
       <p><%= recipeFromDB.mainIngredient %></p>
@@ -21,16 +21,18 @@
   </body>
   <script>
     const trashcan = document.querySelector(".delete");
-    trashcan.addEventListener("click", (e) => {
-      const endpoint = `/community/${trashcan.dataset.doc}`;
-      fetch(endpoint, {
-        method: "DELETE",
-      })
-        .then((response) => response.json())
-        .then((data) => (window.location.href = data.redirect))
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+    if (trashcan) {
+      trashcan.addEventListener("click", (e) => {
+        const endpoint = `/community/${trashcan.dataset.doc}`;
+        fetch(endpoint, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => (window.location.href = data.redirect))
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+    }
   </script>
 </html>
